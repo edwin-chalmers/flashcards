@@ -6,7 +6,9 @@ const {
   evaluateGuess,
   countCards,
   createRound,
-  takeTurn
+  takeTurn,
+  calculatePercentCorrect,
+  endRound
 } = require('../src/card');
 
 describe('card', function() {
@@ -122,6 +124,43 @@ describe('card', function() {
     expect(round.turns).to.deep.equal(2);
     expect(takeTurn(round, guess3)).to.equal('correct!');
     expect(round.incorrectGuesses).to.deep.equal([14]);
+  })
+  
+  it('should calculate and return the percentage of correct guesses', function() {
+    const card1 = createCard(2, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    
+    const deck = countCards([card1, card2, card3]);
+    const round = createRound(deck);
+    const guess1 = 'sea otter';
+    const guess2 = 'appendix';
+    const guess3 = 'Fitzgerald';
+    takeTurn(round, guess1)
+    takeTurn(round, guess2)
+    takeTurn(round, guess3)
+    var percentCorrect = calculatePercentCorrect(round)
+
+    expect(percentCorrect).to.deep.equal(66);
+  })
+  
+  it('should end the round', function() {
+    const card1 = createCard(2, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    
+    const deck = countCards([card1, card2, card3]);
+    const round = createRound(deck);
+    const guess1 = 'sea otter';
+    const guess2 = 'appendix';
+    const guess3 = 'Fitzgerald';
+    takeTurn(round, guess1)
+    takeTurn(round, guess2)
+    takeTurn(round, guess3)
+    const percentCorrect = calculatePercentCorrect(round)
+    const roundEnds = endRound(round, percentCorrect)
+
+    expect(roundEnds).to.equal('** Round over! ** You answered 66% of the questions correctly!');
   })
 
 
