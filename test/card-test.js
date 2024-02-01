@@ -5,6 +5,7 @@ const {
   createCard, 
   evaluateGuess,
   countCards,
+  createDeck,
   createRound,
   takeTurn,
   calculatePercentCorrect,
@@ -45,7 +46,7 @@ describe('card', function() {
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = countCards([card1, card2, card3]);
 
-    expect(deck.length).to.deep.equal(3)
+    expect(deck).to.deep.equal(3)
   });
 
   it('should create a round to organize guesses and records', function() {
@@ -53,7 +54,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     // console.log(round)
 
@@ -68,7 +69,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
 
     takeTurn(round)
@@ -82,7 +83,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     const correctGuess = 'sea otter'
     const incorrectGuess = 'pug'
@@ -96,7 +97,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     const incorrectGuess = 'pug';
 
@@ -109,7 +110,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     const guess1 = 'sea otter';
     const guess2 = 'appendix';
@@ -131,7 +132,7 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     const guess1 = 'sea otter';
     const guess2 = 'appendix';
@@ -149,13 +150,16 @@ describe('card', function() {
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     
-    const deck = countCards([card1, card2, card3]);
+    const deck = createDeck([card1, card2, card3]);
     const round = createRound(deck);
     const guess1 = 'sea otter';
     const guess2 = 'appendix';
     const guess3 = 'Fitzgerald';
+    console.log(round.currentCard.correctAnswer)
     takeTurn(round, guess1)
+    console.log(round.currentCard.correctAnswer)
     takeTurn(round, guess2)
+    console.log(round.currentCard.correctAnswer)
     takeTurn(round, guess3)
     const percentCorrect = calculatePercentCorrect(round)
     const roundEnds = endRound(round, percentCorrect)
