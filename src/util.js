@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { takeTurn, endRound } = require('./card');
+const { takeTurn, endRound, calculatePercentCorrect } = require('./card');
 
 const genList = (round) => {
   let card = round.currentCard;
@@ -35,11 +35,12 @@ async function main(round) {
   const getAnswer = await inquirer.prompt(genList(currentRound));
   const getConfirm = await inquirer.prompt(confirmUpdate(getAnswer.answers, round));
 
-    if(!round.currentCard) {
-      endRound(round);
-    } else {
-      main(round);
-    }
+  if (round.turns >= round.deck.length) {
+    const percent = calculatePercentCorrect(round);
+    console.log(endRound(round, percent));
+  } else {
+    main(round);
+  }
 }
 
 module.exports.main = main;
