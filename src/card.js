@@ -44,8 +44,8 @@ function increaseTurn(round) {
     round.turns++;
     if (round.turns < round.deck.length) {
         round.currentCard = round.deck[round.turns];
-    } else {
-        endRound(round, calculatePercentCorrect(round))
+    // } else {
+    //     endRound(round, calculatePercentCorrect(round))
     }
 }
 
@@ -62,7 +62,6 @@ function calculatePercentCorrect(round) {
 
 function endRound(round, percent) {
     if (round.turns === round.deck.length) {
-        console.log(`** Round over! ** You answered ${percent}% of the questions correctly!`)
         return `** Round over! ** You answered ${percent}% of the questions correctly!`
     }
 }
