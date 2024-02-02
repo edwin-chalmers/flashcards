@@ -15,3 +15,5 @@ Fork and clone down the repo. Navigate to the directory or OS equivelent and ent
 
 When the game is functioning appropriately, you will be prompted for each question, have the opportunity to select an answer, and will be given feedback. You will be able to play through the entire deck of cards:
 
+
+![Recorded_screen_1_V2](https://github.com/edwin-chalmers/flashcards/assets/149631946/6765c0be-a674-4864-b596-9752ebe4bf02)
