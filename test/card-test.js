@@ -89,9 +89,11 @@ describe('card', function() {
     expect(round.turns).to.deep.equal(0);
     expect(takeTurn(guess1, round)).to.equal('correct!');
     expect(round.incorrectGuesses).to.deep.equal([]);
+
     expect(round.turns).to.deep.equal(1);
     expect(takeTurn(guess2, round)).to.equal('incorrect!');
     expect(round.incorrectGuesses).to.deep.equal([14]);
+    
     expect(round.turns).to.deep.equal(2);
     expect(takeTurn(guess3, round)).to.equal('correct!');
     expect(round.incorrectGuesses).to.deep.equal([14]);
