@@ -30,14 +30,23 @@ const confirmUpdate = (id, round) => {
   }
 }
 
+let startTime = Date.now();
+
 async function main(round) {
   const currentRound = await getRound(round);
   const getAnswer = await inquirer.prompt(genList(currentRound));
   const getConfirm = await inquirer.prompt(confirmUpdate(getAnswer.answers, round));
 
   if (round.turns >= round.deck.length) {
+    const endTime = Date.now();
+    const duration = endTime - startTime;
+    const minutes = Math.floor(duration / 60000);
+    const seconds = ((duration % 60000) / 1000).toFixed(0);
+        
+
     const percent = calculatePercentCorrect(round);
     console.log(endRound(round, percent));
+    console.log(`Time taken: ${minutes} minute(s) and ${seconds} second(s).`);
   } else {
     main(round);
   }

@@ -29,7 +29,7 @@ function evaluateGuess(guess, correctAnswer, round) {
     if (guess === correctAnswer) {
         return 'correct!'
     } else {
-        incorrectGuessID(round)
+        guessWrong(round)
         return 'incorrect!'
     }
 }
@@ -44,12 +44,10 @@ function increaseTurn(round) {
     round.turns++;
     if (round.turns < round.deck.length) {
         round.currentCard = round.deck[round.turns];
-    // } else {
-    //     endRound(round, calculatePercentCorrect(round))
     }
 }
 
-function incorrectGuessID(round) {
+function guessWrong(round) {
     if (round) {
     round.incorrectGuesses.push(round.currentCard.id);
     }
